@@ -9,63 +9,62 @@ import "./Event.sol";
 
 contract EventFactory {
 
-	uint16 eventNo;
-	address owner;
-	Event[] events;
+  uint16 eventNo;
+  address owner;
+  Event[] events;
 
-	modifier onlyOwner() {
-		if ( owner != msg.sender ) throw;
-		_;
-	}
+  modifier onlyOwner() {
+    if ( owner != msg.sender ) throw;
+    _;
+  }
 
-	function EventFactory() {
-		owner = msg.sender;
-	}
+  function EventFactory() {
+    owner = msg.sender;
+  }
 
-	function createEvent
-    (	
-		address _artist,
-		address _organizer,
-		address _auditorium,
+  function createEvent(  
+    address _artist,
+    address _organizer,
+    address _auditorium,
 
-		address _notary,
+    address _notary,
 
-		bytes32 _eventName,
-		uint    _eventDate, // TODO: revisar
-		uint256 _eventPrice,
-		uint16  _totalTickets
+    bytes32 _eventName,
+    uint    _eventDate, // TODO: revisar
+    uint256 _eventPrice,
+    uint16  _totalTickets
 
-		) {
+    ) {
 
-    	eventNo++;
+      eventNo++;
 
-    	Event evt = new Event(
-    		eventNo,
-    		
-    		_artist,
-    		_organizer,
-    		_auditorium,
-    		
-    		_notary,
-    		
-    		owner,
-    		_eventName,
-    		_eventDate,
-    		_eventPrice,
-    		_totalTickets
-    	);
+      Event evt = new Event(
+        eventNo,
+        
+        _artist,
+        _organizer,
+        _auditorium,
+        
+        _notary,
+        
+        owner,
+        _eventName,
+        _eventDate,
+        _eventPrice,
+        _totalTickets
+      );
 
-    	events.push(evt);
+      events.push(evt);
 
-	}
-	
-	function getEvent(uint eventNo) constant returns (address) {
-	    return events[eventNo];
-	}
-	
-	function getEventCount() constant returns (uint) {
-	    return events.length;
-	}
+  }
+  
+  function getEvent(uint eventNo) constant returns (address) {
+      return events[eventNo];
+  }
+  
+  function getEventCount() constant returns (uint) {
+      return events.length;
+  }
 
 }
 
